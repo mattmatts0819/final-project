@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+.site-title {
+  padding-top: 0.2vh;
+  padding-left: 0.2vw;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.blog-posts {
+  border: black 0.1rem solid;
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+
+.blog-posts p,
+h3,
+ul,
+li {
+  padding-left: 10px;
+}
