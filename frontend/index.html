@@ -3,14 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <title>Blog App</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./logo.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="resources/logo.ico" />
     <link rel="stylesheet" type="text/css" href="/public/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    <h1 class="site-title">Blog App</h1>
-    <br />
-    <h1>Latest Blog Posts</h1>
-    <div id="blogPosts" class="blog-posts"></div>
+    <header>
+      <img src="resources/blog-logo.png" alt="site-logo" class="logo" />
+      <div>
+        <h1>IST256 Discussion Blog</h1>
+        <h4>Sign in to create posts and comment!</h4>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="sidebar">
+        <!-- two divs: one for login and one for creating new post, toggle between based on login status -->
+        <div id="login-form-container">
+          <h3>Login</h3>
+          <form id="login-form" action="">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="text"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <br />
+          <div id="validation"></div>
+        </div>
+
+        <div id="blog-form">
+          <div id="blog-form-container" style="display: none">
+            <div id="userGreeting"></div>
+            <h3>Create a new Blog Post</h3>
+            <form>
+              <form id="blog-post-form" action="">
+                <div class="form-group">
+                  <label for="post-title">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="post-title"
+                    name="post-title"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="post-content">Content</label>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    id="post-content"
+                    name="post-content"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit-post" class="btn btn-primary">
+                  Submit Post
+                </button>
+              </form>
+              <br />
+              <div id="post-validation"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="displayed-page">
+        <h1>Latest Blog Posts</h1>
+        <div id="blog-post"></div>
+      </div>
+    </div>
+    <footer>
+      <p>Copyright &#169; 2024 Matthew Mattera. All Rights Reserved.</p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

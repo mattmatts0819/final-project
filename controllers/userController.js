@@ -39,7 +39,7 @@ export async function createUser(req, res) {
 export async function login(req, res) {
   const { username, password } = req.body;
   try {
-    const newUser = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({ username });
     if (!user || user.password !== password) {
       return res.status(401).json({ message: "Invalid username or password" });
     }
