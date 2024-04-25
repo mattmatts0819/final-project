@@ -161,6 +161,8 @@ document
         throw new Error("Failed to create blog post. Try again.");
       }
 
+      event.target.reset();
+
       await fetchAndDisplayBlogPosts();
 
       console.log("Blog post created succesfully");
