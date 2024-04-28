@@ -283,7 +283,7 @@ function createCommentForm(blogPostId) {
   const submitButton = document.createElement("button");
   submitButton.setAttribute("type", "submit");
   submitButton.textContent = "Submit";
-  submitButton.classList.add("btn", "btn-primary");
+  submitButton.classList.add("btn", "btn-primary", "comment-button");
   commentForm.appendChild(submitButton);
 
   commentForm.addEventListener("submit", async (event) => {

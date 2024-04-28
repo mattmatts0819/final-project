@@ -66,6 +66,7 @@ li {
 
 .likes-button {
   width: 8vw;
+  margin: 5px;
 }
 
 ul {
@@ -74,4 +75,12 @@ ul {
 
 .top-bar {
   display: inline-block;
+}
+
+button {
+  margin: 5px;
+}
+
+.comment-button {
+  margin: 5px;
 }
