@@ -64,7 +64,7 @@ function createBlogPostCard(blogPost) {
   const cardElement = document.createElement("div");
   cardElement.classList.add("blog-post-card");
 
-  const titleElement = document.createElement("H5");
+  const titleElement = document.createElement("H3");
   titleElement.textContent = blogPost.title;
   cardElement.appendChild(titleElement);
 

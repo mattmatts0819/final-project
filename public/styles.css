@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 header {
   padding: 15px;
+  /* display: flex; */
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 header .logo {
   max-width: 13vw;
@@ -38,10 +39,12 @@ html {
   scroll-behavior: smooth;
 }
 
-.blog-posts {
+.blog-post-card {
   border: black 0.1rem solid;
   border-radius: 5px;
   background-color: aliceblue;
+  margin: 10px;
+  padding: 8px;
 }
 
 .blog-posts p,
@@ -59,4 +62,16 @@ li {
 .user-icon {
   height: 3%;
   width: 3%;
+}
+
+.likes-button {
+  width: 8vw;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.top-bar {
+  display: inline-block;
 }
