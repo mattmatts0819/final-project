@@ -29,7 +29,7 @@ const blogPostSchema = new Schema({
     type: String,
     required: false,
   },
-  comment: [
+  comments: [
     {
       user: {
         type: SchemaTypes.ObjectId,
