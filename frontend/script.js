@@ -107,6 +107,11 @@ function createBlogPostCard(blogPost) {
   cardElement.appendChild(postLikesButton);
   cardElement.appendChild(commentsElement);
 
+  if (loggedIn) {
+    const commentForm = createCommentForm(blogPost._id);
+    cardElement.appendChild(commentForm);
+  }
+
   return cardElement;
 }
 
@@ -298,7 +303,7 @@ function createCommentForm(blogPostId) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content: commentContent, userID: userId }),
+        body: JSON.stringify({ userID: userId, content: commentData }),
       });
 
       if (!response.ok) {

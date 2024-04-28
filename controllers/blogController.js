@@ -61,13 +61,13 @@ export async function likeBlogPost(req, res) {
 //create a blog comment
 export async function addBlogComment(req, res) {
   try {
-    const { userId, content } = req.body;
+    const { userID, content } = req.body;
     const blog = await BlogModel.findById(req.params.id);
     if (!blog) {
       res.status(404).json({ message: "Blog not found" });
     }
     const newComment = {
-      user: userId,
+      user: userID,
       content,
       likes: 0,
     };
