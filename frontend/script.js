@@ -50,11 +50,11 @@ async function fetchAndDisplayBlogPosts() {
 
 //func to diplay blog posts
 
-async function displayBlogPost(blogPost) {
+async function displayBlogPost(blogPosts) {
   const blogPostContainer = document.getElementById("blog-post");
   blogPostContainer.innerHTML = "";
 
-  blogPost.forEach((blogPost) => {
+  blogPosts.forEach((blogPost) => {
     const cardElement = createBlogPostCard(blogPost);
     blogPostContainer.appendChild(cardElement);
   });
@@ -76,22 +76,32 @@ function createBlogPostCard(blogPost) {
   contentElement.textContent = blogPost.content;
   cardElement.appendChild(contentElement);
 
-  const likesElement = document.createElement("p");
-  likesElement.textContent = "    Likes: " + blogPost.likes;
-  cardElement.appendChild(likesElement);
+  const postLikesButton = createLikeButton(blogPost.likes);
 
-  const commentElement = document.createElement("ul");
-  blogPost.comments.forEach((comment) => {
-    let commentItem = document.createElement("li");
-    commentItem.innerText =
-      comment.name +
-      ": " +
-      comment.content +
-      "       " +
-      comment.likes +
-      "Likes";
-    commentElement.appendChild(commentItem);
+  postLikesButton.addEventListener("click", async () => {
+    if (blogPost.liked || !loggedIn) {
+      return;
+    }
+    try {
+      const response = await fetch(`/blogs/like/${blogPost._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to like the blog post. Try Again");
+      }
+      blogPost.likes++;
+      postLikesButton.querySelector(
+        ".likes-count"
+      ).textContent = `${blogPost.likes}`;
+      blogPost.liked = true;
+    } catch (error) {
+      console.error("Error: ", error.message);
+    }
   });
+  cardElement.appendChild(postLikesButton);
 
   return cardElement;
 }
@@ -140,13 +150,17 @@ document
       event.target.reset();
     }
   });
+
 document
   .getElementById("blog-post-form")
-  .addEventListener("submit-post", async (event) => {
+  .addEventListener("submit", async (event) => {
+    console.log("checkpoint 1");
     event.preventDefault();
     const formData = new FormData(event.target);
     const title = formData.get("post-title");
     const content = formData.get("post-content");
+
+    console.log("checkpoint 2");
 
     try {
       const response = await fetch("/blogs/", {
@@ -156,20 +170,40 @@ document
         },
         body: JSON.stringify({ title, content, author: userId }),
       });
-
+      console.log("checkpoint 3");
       if (!response.ok) {
+        console.log("error");
         throw new Error("Failed to create blog post. Try again.");
       }
 
       event.target.reset();
-
+      console.log("checkpoint 4");
       await fetchAndDisplayBlogPosts();
 
       console.log("Blog post created succesfully");
     } catch (error) {
       console.error("error: ", error.message);
-
+      console.log("checkpoint 5");
       const postValidation = document.getElementById("post-validation");
       postValidation.innerHTML = `<p>${error.message}</p>`;
     }
   });
+
+function createLikeButton(likes) {
+  const likesButton = document.createElement("button");
+  likesButton.classList.add("likes-button");
+
+  const heartIcon = document.createElement("img");
+  heartIcon.classList.add("heart-icon");
+  heartIcon.src = "public/like-icon.png";
+  heartIcon.alt = "like";
+
+  const likesCount = document.createElement("span");
+  likesCount.textContent = `${likes}`;
+  likesCount.classList.add("likes-count");
+
+  likesButton.appendChild(heartIcon);
+  likesButton.appendChild(likesCount);
+
+  return likesButton;
+}

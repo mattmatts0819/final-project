@@ -50,3 +50,8 @@ ul,
 li {
   padding-left: 10px;
 }
+
+.heart-icon {
+  height: 5%;
+  width: 5%;
+}
